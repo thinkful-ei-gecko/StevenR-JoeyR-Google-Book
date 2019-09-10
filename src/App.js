@@ -18,7 +18,7 @@ class App extends React.Component {
     return searchBooks.split(' ').join('+');
   }
   filter(){
-    return `&filter=${this.state.filterPrice}&printType=${this.state.filterPrintType}`
+    return `&filter=${this.state.filterPrice}&libraryRestrict=no-restrict&printType=${this.state.filterPrintType}`
   }
   handleSearch =(input)=> {
     this.setState({
