@@ -24,5 +24,4 @@ this.props.handleSearch(event.target.searchInput.value)
         
     )}
 
-
 }

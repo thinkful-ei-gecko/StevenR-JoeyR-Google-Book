@@ -16,12 +16,17 @@ class App extends React.Component {
   search(searchBooks){
     return searchBooks.split(' ').join('+');
   }
-  handleSearch(input){
+  handleSearch =(input)=> {
     this.setState({
       searchBooks: input,
 
     }, this.componentDidMount)
 
+  }
+  handleFilter =(input)=>{
+    this.setState({
+      filter: input
+    }, this.componentDidMount)
   }
   setUrl(url){
   
@@ -29,11 +34,10 @@ class App extends React.Component {
   }
   componentDidMount() {
     const url = 'https://www.googleapis.com/books/v1/volumes'
-    const options ={
-      method: 'GET',
-    }
     
-    fetch(this.setUrl(url), options)
+     
+    
+    fetch(this.setUrl(url), {method: 'GET'})
       .then(res => res.json())
       .then(data => {
         this.setState({
