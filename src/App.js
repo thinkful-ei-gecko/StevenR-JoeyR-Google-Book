@@ -1,4 +1,5 @@
 import React from 'react';
+import Form from './components/Form';
 
 
 
@@ -8,12 +9,18 @@ class App extends React.Component {
     super(props);
     this.state = {
       books: [],
-      searchBooks: 'joey',
+      searchBooks: 'joey+romo',
       filter: null,
     }
   }
   search(searchBooks){
     return searchBooks.split(' ').join('+');
+  }
+  handleSearch(input){
+    this.setState({
+      searchBooks: input,
+    })
+
   }
   setUrl(url){
   
@@ -38,11 +45,19 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.books)
-    return(<section>
-      
-  <div> {this.state.books} </div>
-      
+    const bookHtml = this.state.books.map(book => 
+    <div key={book.id}>
+    <div>{book.volumeInfo.title}</div>
+    <div>{book.volumeInfo.subtitle}</div>
+    <div>{book.volumeInfo.authors}</div>
+    </div>
+    
+    );
+    return(
+    <section>
+      {bookHtml}
+      < Form handleSearch = {this.handleSearch} />
+    
     </section>)
   }
 }
