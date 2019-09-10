@@ -2,40 +2,45 @@ import React from 'react';
 
 
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       books: [],
-      selected: []
+      searchBooks: 'joey',
+      filter: null,
     }
   }
-
-  componentDidMount() {
-    fetch('https://www.googleapis.com/books/v1/volumes?q=joey')
-      .then(response => response.json())
-      .then( data => {
-        this.setState({
-          books: [data]
-          
-        });
-        console.log(this.state.books)
-      })
+  search(searchBooks){
+    return searchBooks.split(' ').join('+');
   }
-  setSelected(selected) {
-    this.setState([
-      selected
-    ]);
+  setUrl(url){
+  
+    return `${url}?q=${this.search(this.state.searchBooks)}`
+  }
+  componentDidMount() {
+    const url = 'https://www.googleapis.com/books/v1/volumes'
+    const options ={
+      method: 'GET',
+    }
+    
+    fetch(this.setUrl(url), options)
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          books: data.items
+        })
+      })
+  
     
     
   }
 
   render() {
+    console.log(this.state.books)
     return(<section>
-      {/* < Form 
-        books={this.state.books}
-        search={this.state.selected}
-      /> */}
+      
       <section>
         <div>{this.state.books}</div>
         
