@@ -63,7 +63,7 @@ class App extends React.Component {
       // .then(res => res.json())
       .then(data => {
         this.setState({
-          books: data.items
+          books: data.items ? data.items : []
         })
       }).catch(error => console.log(error))
   
