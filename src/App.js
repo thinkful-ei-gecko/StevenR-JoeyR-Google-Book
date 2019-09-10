@@ -10,48 +10,62 @@ class App extends React.Component {
     this.state = {
       books: [],
       searchBooks: 'joey+romo',
-      filterPrice: null,
-      filterPrintType: null,
+      filterPrice: 'ebooks',
+      filterPrintType: 'all',
     }
   }
   search(searchBooks){
     return searchBooks.split(' ').join('+');
   }
+  filter(){
+    return `&filter=${this.state.filterPrice}&printType=${this.state.filterPrintType}`
+  }
   handleSearch =(input)=> {
     this.setState({
       searchBooks: input,
 
-    }, this.componentDidMount)
+    }, this.getBooks)
 
   }
   handlePriceFilter =(input)=>{
+    console.log(input)
     this.setState({
+      books: [],
       filterPrice: input
-    }, this.componentDidMount)
+    }, this.getBooks)
   }
 
   handlePrintTypeFilter =(input)=>{
+    console.log(input)
     this.setState({
+      books: [],
       filterPrintType: input
-    }, this.componentDidMount)
+    }, this.getBooks)
+    
   }
 
   setUrl(url){
   
-    return `${url}?q=${this.search(this.state.searchBooks)}`
+    return `${url}?q=${this.search(this.state.searchBooks)}${this.filter()}`
   }
-  componentDidMount() {
+  getBooks() {
     const url = 'https://www.googleapis.com/books/v1/volumes'
+    console.log(this.setUrl(url))
     
      
     
     fetch(this.setUrl(url), {method: 'GET'})
-      .then(res => res.json())
+      .then(res => {
+        if(res.ok){
+          return res.json()
+        }
+      })
+      // .then(res => res.json())
       .then(data => {
         this.setState({
           books: data.items
         })
-      })
+      }).catch(error => console.log(error))
   
     
     
