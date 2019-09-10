@@ -19,7 +19,8 @@ class App extends React.Component {
   handleSearch(input){
     this.setState({
       searchBooks: input,
-    })
+
+    }, this.componentDidMount)
 
   }
   setUrl(url){
@@ -55,9 +56,9 @@ class App extends React.Component {
     );
     return(
     <section>
-      {bookHtml}
+      
       < Form handleSearch = {this.handleSearch} />
-    
+      {bookHtml}
     </section>)
   }
 }
