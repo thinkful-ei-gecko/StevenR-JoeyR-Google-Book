@@ -72,11 +72,17 @@ class App extends React.Component {
   }
 
   render() {
+    
     const bookHtml = this.state.books.map(book => 
+    
     <div key={book.id}>
-    <div>{book.volumeInfo.title}</div>
-    <div>{book.volumeInfo.subtitle}</div>
+    <h2>{book.volumeInfo.title}</h2>
+    <h3>{book.volumeInfo.subtitle}</h3>
+    
+    <img src="{book.imageLinks.thumbnail}" alt="book cover" />
     <div>{book.volumeInfo.authors}</div>
+    <p>{book.volumeInfo.description}</p>
+
     </div>
     
     );
