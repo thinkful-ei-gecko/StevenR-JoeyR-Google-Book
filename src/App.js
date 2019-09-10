@@ -1,6 +1,6 @@
 import React from 'react';
 import Form from './components/Form';
-
+import FilterBar from './components/FilterBar'
 
 
 
@@ -10,7 +10,8 @@ class App extends React.Component {
     this.state = {
       books: [],
       searchBooks: 'joey+romo',
-      filter: null,
+      filterPrice: null,
+      filterPrintType: null,
     }
   }
   search(searchBooks){
@@ -23,11 +24,18 @@ class App extends React.Component {
     }, this.componentDidMount)
 
   }
-  handleFilter =(input)=>{
+  handlePriceFilter =(input)=>{
     this.setState({
-      filter: input
+      filterPrice: input
     }, this.componentDidMount)
   }
+
+  handlePrintTypeFilter =(input)=>{
+    this.setState({
+      filterPrintType: input
+    }, this.componentDidMount)
+  }
+
   setUrl(url){
   
     return `${url}?q=${this.search(this.state.searchBooks)}`
@@ -62,6 +70,8 @@ class App extends React.Component {
     <section>
       
       < Form handleSearch = {this.handleSearch} />
+      < FilterBar handlePriceFilter = {this.handlePriceFilter}
+      handlePrintTypeFilter = {this.handlePrintTypeFilter} />
       {bookHtml}
     </section>)
   }
