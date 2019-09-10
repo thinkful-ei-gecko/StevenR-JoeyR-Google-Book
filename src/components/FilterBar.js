@@ -26,6 +26,9 @@ export default class FilterBar extends React.Component {
                 <select onChange={this.handleBookFilter}
                 name="bookFilter" 
                 id="bookFilter">
+                    <option value="ebooks">eBooks</option>
+                    <option value="full">Full</option>
+                    <option value="partial">Partial</option>
                     <option value="free-ebooks">Free</option>
                     <option value="paid-ebooks">Paid</option>
                 </select>
