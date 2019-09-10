@@ -41,10 +41,7 @@ class App extends React.Component {
     console.log(this.state.books)
     return(<section>
       
-      <section>
-        <div>{this.state.books}</div>
-        
-      </section>
+  <div> {this.state.books} </div>
       
     </section>)
   }
